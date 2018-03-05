@@ -177,10 +177,10 @@
           <p>Automated vs manual migration?</p>
         </li>
         <li>
-          <p>Manual migration benefits =&gt; user <strong>familiarity</strong>, <strong>focus</strong> on what's important (less likely to ask for unnecessary content if they have to enter it)</p>
+          <p>Manual migration benefits =&gt; user <strong>familiarity</strong>, user <strong>focus</strong> on what's important (less likely to ask for unnecessary content if they have to enter it)</p>
         </li>
         <li>
-          <p>Talk to existing users (editors) - get feedback about what works, what doesn't, any content ambiguity</p>
+          <p>Talk to users (editors) - get feedback about what works, what doesn't, any content ambiguity</p>
         </li>
         <li>
           <p>Drives migration strategy, helps build target content types etc</p>
@@ -219,7 +219,7 @@
           <p>Managed (and unmanaged) files - teaser/hero images, attachments, author photos, embedded media</p>
         </li>
         <li>
-          <p>Data analysis &amp; feedback helped decisions on what to migrate
+          <p>Data analysis &amp; feedback helps decisions on what to migrate
             (e.g. ambiguous fields removed -&gt; teaser vs hero image)</p>
         </li>
         <li>
@@ -355,7 +355,7 @@ $databases['news_migrate']['default'] = array (
       <h2>Authors</h2>
       <ul>
         <li>
-          <p>Create node for each author (node.type = "author")</p>
+          <p>Create node for each author (node.type = author)</p>
         </li>
         <li>
           <p>Use core destination plugin <code>entity:node</code></p>
@@ -399,7 +399,7 @@ $databases['news_migrate']['default'] = array (
           <p>Embedded (inline) files and media downloaded as unmanaged file to target folder</p>
         </li>
         <li>
-          <p>Existing (site) body images repointed to absolute uri's</p>
+          <p>Existing (public://) body images repointed to absolute uri's</p>
         </li>
         <li>
           <p>Embedded media tags converted to &lt;img&gt; tags</p>
