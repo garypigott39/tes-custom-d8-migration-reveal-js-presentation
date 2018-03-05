@@ -270,210 +270,237 @@ $databases['news_migrate']['default'] = array (
       </pre>
     </section>
 
-    <section id="migration-group">
-      <h2>Migration group "news2"</h2>
-      <ul>
-        <li>
-          <p>File <code>migrate_plus.migration_group.news2.yml</code></p>
-        </li>
-        <li>
-          <p>Group related migrations together</p>
-        </li>
-        <li>
-          <p>Define <strong>shared</strong> configuration</p>
-        </li>
-        <li>
-          <p>Define shared <strong>constants</strong></p>
-        </li>
-        <li>
-          <p>Run migrations as a group <code>drush mim --group=news2</code></p>
-        </li>
-        <li>
-          <p>Use migrate UI</p>
-        </li>
-      </ul>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="migration-group">
+        <h2>Migration group "news2"</h2>
+        <ul>
+          <li>
+            <p>File <code>migrate_plus.migration_group.news2.yml</code></p>
+          </li>
+          <li>
+            <p>Group related migrations together</p>
+          </li>
+          <li>
+            <p>Define <strong>shared</strong> configuration</p>
+          </li>
+          <li>
+            <p>Define shared <strong>constants</strong></p>
+          </li>
+          <li>
+            <p>Run migrations as a group <code>drush mim --group=news2</code></p>
+          </li>
+          <li>
+            <p>Use migrate UI</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="group-config-file">
+        <h2>Group Config File</h2>
+        <p><a href="./img/news2-group-yaml.png" target="_blank"><img src="./img/news2-group-yaml.png" alt="Group config YML file" style="max-width:100%;"></a><span style="font-style: italic; font-size: 75%; position: absolute; top:30%; left: 10%; width: 50px">connection name gotcha!</span></p>
+      </section>
     </section>
 
-    <section id="group-config-file">
-      <h2>Group Config File</h2>
-      <p><a href="./img/news2-group-yaml.png" target="_blank"><img src="./img/news2-group-yaml.png" alt="Group config YML file" style="max-width:100%;"></a><span style="font-style: italic; font-size: 75%; position: absolute; top:30%; left: 10%; width: 50px">connection name gotcha!</span></p>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="taxonomy-term-mapping">
+        <h2>Taxonomy term mapping</h2>
+        <ul>
+          <li>
+            <p>Already pre-populated several vocabularies</p>
+          </li>
+          <li>
+            <p>Target field (category) => regions + phases + subjects + <strong>tags</strong></p>
+          </li>
+          <li>
+            <p>Source mapping =&gt; 3 taxonomy fields to a single field on new content type</p>
+          </li>
+          <li>
+            <p>If it exists in regions, phases, or subjects then term not migrated</p>
+          </li>
+          <li>
+            <p>Migration requirement: certain vocabularies pre-populated <code>checkRequirements()</code></p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="taxonomy-config-file">
+        <h2>Taxonomy Config File</h2>
+        <p><a href="./img/news2-tags-yaml.png" target="_blank"><img src="./img/news2-tags-yaml.png" alt="Taxonomy terms config YML file" style="max-width:100%;"></a></p>
+      </section>
     </section>
 
-    <section id="taxonomy-term-mapping">
-      <h2>Taxonomy term mapping</h2>
-      <ul>
-        <li>
-          <p>Already pre-populated several vocabularies</p>
-        </li>
-        <li>
-          <p>Target field (category) => regions + phases + subjects + <strong>tags</strong></p>
-        </li>
-        <li>
-          <p>Source mapping =&gt; 3 taxonomy fields to a single field on new content type</p>
-        </li>
-        <li>
-          <p>If it exists in regions, phases, or subjects then term not migrated</p>
-        </li>
-        <li>
-          <p>Migration requirement: certain vocabularies pre-populated <code>checkRequirements()</code></p>
-        </li>
-      </ul>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="author-images-attachments">
+        <h2>Author images, attachments, teaser images</h2>
+        <ul>
+          <li>
+            <p>Create file entities for these</p>
+          </li>
+          <li>
+            <p>Use core destination plugin <code>entity:file</code></p>
+          </li>
+          <li>
+            <p>Want to select target folder for each file source</p>
+          </li>
+          <li>
+            <p>Want to <em>niceify</em> source file names (remove spaces, uppercase etc)</p>
+          </li>
+          <li>
+            <p>Choose single image from source teaser or hero fields</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="author-images-config-file">
+        <h2>Author Images Config File</h2>
+        <p><a href="./img/news2-author-images-yaml.png" target="_blank"><img src="./img/news2-author-images-yaml.png" alt="Author images config YML file" style="max-width:100%;"></a></p>
+      </section>
     </section>
 
-    <section id="taxonomy-config-file">
-      <h2>Taxonomy Config File</h2>
-      <p><a href="./img/news2-tags-yaml.png" target="_blank"><img src="./img/news2-tags-yaml.png" alt="Taxonomy terms config YML file" style="max-width:100%;"></a></p>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="authors">
+        <h2>Authors</h2>
+        <ul>
+          <li>
+            <p>Create node for each author (node.type = author)</p>
+          </li>
+          <li>
+            <p>Use core destination plugin <code>entity:node</code></p>
+          </li>
+          <li>
+            <p>Use <code>migration_lookup</code> plugin to map image field to file entity</p>
+          </li>
+          <li>
+            <p><strong>no_stub: true</strong> - dont create stubs for missing file entities</p>
+          </li>
+          <li>
+            <p>Optional dependency - author images migrated first</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="authors-config-file">
+        <h2>Authors Config File</h2>
+        <p><a href="./img/news2-authors-yaml.png" target="_blank"><img src="./img/news2-authors-yaml.png" alt="Authors migration YML file" style="max-width:100%;"></a></p>
+      </section>
     </section>
 
-    <section id="author-images-attachments">
-      <h2>Author images, attachments, teaser images</h2>
-      <ul>
-        <li>
-          <p>Create file entities for these</p>
-        </li>
-        <li>
-          <p>Use core destination plugin <code>entity:file</code></p>
-        </li>
-        <li>
-          <p>Want to select target folder for each file source</p>
-        </li>
-        <li>
-          <p>Want to <em>niceify</em> source file names (remove spaces, uppercase etc)</p>
-        </li>
-        <li>
-          <p>Choose single image from source teaser or hero fields</p>
-        </li>
-      </ul>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="news-articles">
+        <h2>News Articles</h2>
+        <ul>
+          <li>
+            <p>Create node for each published article (node.type = news_article)</p>
+          </li>
+          <li>
+            <p>Destination plugin <code>entity:node</code></p>
+          </li>
+          <li>
+            <p><code>migration_lookup</code> for category, teaser image, and attachments</p>
+          </li>
+          <li>
+            <p><code>migration_lookup</code> to itself with <strong>no_stub:false</strong> to create related content link. Stub entries will be replaced when converted</p>
+          </li>
+          <li>
+            <p>Optional migration dependency on tags, teasers, authors &amp; attachments</p>
+          </li>
+          <li>
+            <p>Embedded (inline) files and media downloaded as unmanaged file to target folder</p>
+          </li>
+          <li>
+            <p>Existing (public://) body images repointed to absolute uri's</p>
+          </li>
+          <li>
+            <p>Embedded media tags converted to &lt;img&gt; tags</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="news-articles-config-file">
+        <h2>News Articles Config File</h2>
+        <p><a href="./img/news-articles-yaml-snippet.png" target="_blank"><img src="./img/news-articles-yaml-snippet.png" alt="News article YML snippet" style="max-width:100%;"></a></p>
+      </section>
     </section>
 
-    <section id="author-images-config-file">
-      <h2>Author Images Config File</h2>
-      <p><a href="./img/news2-author-images-yaml.png" target="_blank"><img src="./img/news2-author-images-yaml.png" alt="Author images config YML file" style="max-width:100%;"></a></p>
-    </section>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="migration-ui">
+        <h2>Migration UI</h2>
+        <ul>
+          <li>
+            <p>Provided by <strong>migration_tools</strong> module</p>
+          </li>
+          <li>
+            <p>Migration groups page</p>
+          </li>
+          <li>
+            <p>Migration <small>[GROUP]</small> overview page</p>
+          </li>
+          <li>
+            <p>Migration <small>[ID]</small> execute page</p>
+          </li>
+          <li>
+            <p>Migration <small>[ID]</small> overview page</p>
+          </li>
+          <li>
+            <p>Migration <small>[ID]</small> source page</p>
+          </li>
+          <li>
+            <p>Migration <small>[ID]</small> process page</p>
+          </li>
+          <li>
+            <p>Migration <small>[ID]</small> process page</p>
+          </li>
+        </ul>
+      </section>
 
-    <section id="authors">
-      <h2>Authors</h2>
-      <ul>
-        <li>
-          <p>Create node for each author (node.type = author)</p>
-        </li>
-        <li>
-          <p>Use core destination plugin <code>entity:node</code></p>
-        </li>
-        <li>
-          <p>Use <code>migration_lookup</code> plugin to map image field to file entity</p>
-        </li>
-        <li>
-          <p><strong>no_stub: true</strong> - dont create stubs for missing file entities</p>
-        </li>
-        <li>
-          <p>Optional dependency - author images migrated first</p>
-        </li>
-      </ul>
-    </section>
+      <section id="migration-ui-groups">
+        <h2>Migration groups page</h2>
+        <p><a href="./img/migration-ui-group.png" target="_blank"><img src="./img/migration-ui-group.png" alt="Migration group page" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="authors-config-file">
-      <h2>Authors Config File</h2>
-      <p><a href="./img/news2-authors-yaml.png" target="_blank"><img src="./img/news2-authors-yaml.png" alt="Authors migration YML file" style="max-width:100%;"></a></p>
-    </section>
+      <section id="migration-ui-group-overview">
+        <h2>Migration <small>[GROUP]</small> overview page</h2>
+        <p><a href="./img/migration-ui-news2-overview.png" target="_blank"><img src="./img/migration-ui-news2-overview.png" alt="News2 Migration Group Overview" style="max-width:100%;"></a></p>
+        <ul>
+          <li>Displayed in label (title) order, not in migration dependency order</li>
+        </ul>
+      </section>
 
-    <section id="news-articles">
-      <h2>News Articles</h2>
-      <ul>
-        <li>
-          <p>Create node for each published article (node.type = news_article)</p>
-        </li>
-        <li>
-          <p>Destination plugin <code>entity:node</code></p>
-        </li>
-        <li>
-          <p><code>migration_lookup</code> for category, teaser image, and attachments</p>
-        </li>
-        <li>
-          <p><code>migration_lookup</code> to itself with <strong>no_stub:false</strong> to create related content link. Stub entries will be replaced when converted</p>
-        </li>
-        <li>
-          <p>Optional migration dependency on tags, teasers, authors &amp; attachments</p>
-        </li>
-        <li>
-          <p>Embedded (inline) files and media downloaded as unmanaged file to target folder</p>
-        </li>
-        <li>
-          <p>Existing (public://) body images repointed to absolute uri's</p>
-        </li>
-        <li>
-          <p>Embedded media tags converted to &lt;img&gt; tags</p>
-        </li>
-      </ul>
-    </section>
+      <section id="migrate-id-execute">
+        <h2>Migration <small>[ID]</small> Execute page</h2>
+        <ul>
+          <li>
+            <p>Operations: <strong>Import, Rollback, Stop, Reset</strong>. Notice update checkbox &amp; ignore dependencies checkbox.</p>
+          </li>
+        </ul>
+        <p><a href="./img/migration-ui-news2-execute.png" target="_blank"><img src="./img/migration-ui-news2-execute.png" alt="News articles migration execute page - via UI" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="news-articles-config-file">
-      <h2>News Articles Config File</h2>
-      <p><a href="./img/news-articles-yaml-snippet.png" target="_blank"><img src="./img/news-articles-yaml-snippet.png" alt="News article YML snippet" style="max-width:100%;"></a></p>
-    </section>
+      <section id="migrate-id-overview">
+        <h2>Migration <small>[ID]</small> Overview page</h2>
+        <p><a href="./img/migration-ui-news2-overview-tab.png" target="_blank"><img src="./img/migration-ui-news2-overview-tab.png" alt="News articles migration overview - via UI" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="migration-ui">
-      <h2></a>Migration UI</h2>
-      <ul>
-        <li>
-          <p>Provided by migration_tools module</p>
-        </li>
-        <li>
-          <p>Migration groups page</p>
-        </li>
-        <li>
-          <p>Migration group overview page</p>
-        </li>
-        <li>
-          <p>Individual migration execute page</p>
-        </li>
-        <li>
-          <p>Individual migration overview, source, process &amp; destination pages</p>
-        </li>
-      </ul>
-    </section>
+      <section id="migrate-id-source">
+        <h2>Migration <small>[ID]</small> Source page</h2>
+        <p><a href="./img/migration-ui-news2-source-tab.png" target="_blank"><img src="./img/migration-ui-news2-source-tab.png" alt="News articles migration source - via UI" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="migration-ui-groups">
-      <h2>Migration groups page</h2>
-      <p><a href="./img/migration-ui-group.png" target="_blank"><img src="./img/migration-ui-group.png" alt="Migration group page" style="max-width:100%;"></a></p>
-    </section>
+      <section id="migrate-id-process">
+        <h2>Migration <small>[ID]</small> Process page</h2>
+        <p><a href="./img/migration-ui-news2-process-tab.png" target="_blank"><img src="./img/migration-ui-news2-process-tab.png" alt="News articles migration process - via UI" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="migration-ui-group-overview">
-      <h2>Migration group overview page</h2>
-      <p><a href="./img/migration-ui-news2-overview.png" target="_blank"><img src="./img/migration-ui-news2-overview.png" alt="News2 Migration Group Overview" style="max-width:100%;"></a></p>
-      <ul>
-        <li>Displayed in label (title) order, not in migration dependency order</li>
-      </ul>
-    </section>
-
-    <section id="migrate-id-execute">
-      <h2>Migration ID Execute page</h2>
-      <ul>
-        <li>
-          <p>Operations: <strong>Import, Rollback, Stop, Reset</strong>. Notice update checkbox &amp; ignore dependencies checkbox.</p>
-        </li>
-      </ul>
-      <p><a href="./img/migration-ui-news2-execute.png" target="_blank"><img src="./img/migration-ui-news2-execute.png" alt="News articles migration execute page - via UI" style="max-width:100%;"></a></p>
-    </section>
-
-    <section id="migrate-id-overview">
-      <h2>Migration ID Overview page</h2>
-      <p><a href="./img/migration-ui-news2-overview-tab.png" target="_blank"><img src="./img/migration-ui-news2-overview-tab.png" alt="News articles migration overview - via UI" style="max-width:100%;"></a></p>
-    </section>
-
-    <section id="migrate-id-source">
-      <h2>Migration ID Source page</h2>
-      <p><a href="./img/migration-ui-news2-source-tab.png" target="_blank"><img src="./img/migration-ui-news2-source-tab.png" alt="News articles migration source - via UI" style="max-width:100%;"></a></p>
-    </section>
-
-    <section id="migrate-id-process">
-      <h2>Migration ID Process page</h2>
-      <p><a href="./img/migration-ui-news2-process-tab.png" target="_blank"><img src="./img/migration-ui-news2-process-tab.png" alt="News articles migration process - via UI" style="max-width:100%;"></a></p>
-    </section>
-
-    <section id="migrate-id-destination">
-      <h2>Migration ID Destination page</h2>
-      <p><a href="./img/migration-ui-news2-dest-tab.png" target="_blank"><img src="./img/migration-ui-news2-dest-tab.png" alt="New articles migration destination - via UI" style="max-width:100%;"></a></p>
+      <section id="migrate-id-destination">
+        <h2>Migration <small>[ID]</small> Destination page</h2>
+        <p><a href="./img/migration-ui-news2-dest-tab.png" target="_blank"><img src="./img/migration-ui-news2-dest-tab.png" alt="New articles migration destination - via UI" style="max-width:100%;"></a></p>
+      </section>
     </section>
 
     <section id="source-plugins">
@@ -580,20 +607,22 @@ $databases['news_migrate']['default'] = array (
       <p>See <a href="https://www.drupal.org/docs/8/api/migrate-api/migrate-process-plugins/list-of-core-process-plugins" rel="nofollow">https://www.drupal.org/docs/8/api/migrate-api/migrate-process-plugins/list-of-core-process-plugins</a></p>
     </section>
 
-    <section id="d7-news-file-download-1">
-      <h2 class="no-text-transform">d7_news_file_download</h2>
-      <ul>
-        <li>
-          <p>Extending existing migrate <code>Download</code> class</p>
-        </li>
-        <li>
-          <p>Provides ability to override default <code>guzzle_options</code></p>
-        </li>
-      </ul>
-    </section>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="d7-news-file-download-1">
+        <h2 class="no-text-transform">d7_news_file_download</h2>
+        <ul>
+          <li>
+            <p>Extending existing migrate <code>Download</code> class</p>
+          </li>
+          <li>
+            <p>Provides ability to override default <code>guzzle_options</code></p>
+          </li>
+        </ul>
+      </section>
 
-    <section id="d7-news-file-download-2">
-      <pre class="xsmaller">
+      <section id="d7-news-file-download-2">
+        <pre class="xsmaller">
 &lt;?php
 namespace Drupal\tg_news2_migration\Plugin\migrate\process;
 
@@ -636,23 +665,26 @@ class D7NewsFileDownload extends Download {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $file_system, $http_client);
   }
 }
-      </pre>
+        </pre>
+      </section>
     </section>
 
-    <section id="d7-stub-name-1">
-      <h2 class="no-text-transform">d7_stub_name</h2>
-      <ul>
-        <li>
-          <p>Extending existing migrate <code>ProcessPluginBase</code> class</p>
-        </li>
-        <li>
-          <p>Provides ability to output a nicer format <strong>stub name</strong></p>
-        </li>
-        <li>
-          <p>Only applies to stub rows <code>$row->isStub() == true</code></p>
-        </li>
-      </ul>
-      <pre>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="d7-stub-name-1">
+        <h2 class="no-text-transform">d7_stub_name</h2>
+        <ul>
+          <li>
+            <p>Extending existing migrate <code>ProcessPluginBase</code> class</p>
+          </li>
+          <li>
+            <p>Provides ability to output a nicer format <strong>stub name</strong></p>
+          </li>
+          <li>
+            <p>Only applies to stub rows <code>$row->isStub() == true</code></p>
+          </li>
+        </ul>
+        <pre>
 # YML config snippet showing it in use
 process:
     title:
@@ -660,11 +692,11 @@ process:
         plugin: d7_stub_name
         source: title
         prefix: 'Stub: '
-      </pre>
-    </section>
+        </pre>
+      </section>
 
-    <section id="d7-stub-name-2">
-      <pre class="xsmaller">
+      <section id="d7-stub-name-2">
+        <pre class="xsmaller">
 &lt;?php
 namespace Drupal\tg_news2_migration\Plugin\migrate\process;
 
@@ -715,14 +747,15 @@ class D7StubName extends ProcessPluginBase {
     return $value;
   }
 }
-</pre>
-    </section>
+  </pre>
+      </section>
 
-    <section id="d7-stub-name-3">
-      <h2>Nice Stub Names</h2>
-      <p>The screeshot shows the end result of these <strong>nicer</strong> stub names.</p>
-      <p><a href="./img/nicer-stub-names.png" target="_blank"><img src="./img/nicer-stub-names.png" alt="Created stub entries with nicer stub name" style="max-width:100%;"></a></p>
-      <p>IMO that's nicer than <code>hacleliwritresathafriclodiwoslacogurjh...</code> and much easier to query on <code>SELECT * FROM node_field_data WHERE title LIKE 'Stub:%'</code></p>
+      <section id="d7-stub-name-3">
+        <h2>Nice Stub Names</h2>
+        <p>The screeshot shows the end result of these <strong>nicer</strong> stub names.</p>
+        <p><a href="./img/nicer-stub-names.png" target="_blank"><img src="./img/nicer-stub-names.png" alt="Created stub entries with nicer stub name" style="max-width:100%;"></a></p>
+        <p>IMO that's nicer than <code>hacleliwritresathafriclodiwoslacogurjh...</code> and much easier to query on <code>SELECT * FROM node_field_data WHERE title LIKE 'Stub:%'</code></p>
+      </section>
     </section>
 
     <section id="destination-plugins">
@@ -750,91 +783,94 @@ class D7StubName extends ProcessPluginBase {
       <p>See <a href="https://www.drupal.org/docs/8/api/migrate-api/migrate-destination-plugins-examples" rel="nofollow">https://www.drupal.org/docs/8/api/migrate-api/migrate-destination-plugins-examples</a></p>
     </section>
 
-    <section id="drush-commands">
-      <h2>drush commands</h2>
-      <ul>
-        <li>
-          <p>Provided by migrate_tools module</p>
-        </li>
-        <li>
-          <p>migrate-status (ms)</p>
-        </li>
-        <li>
-          <p>migrate-import (mim)</p>
-        </li>
-        <li>
-          <p>migrate-rollback (mr)</p>
-        </li>
-        <li>
-          <p>migrate-stop (mst)</p>
-        </li>
-        <li>
-          <p>migrate-reset-status (mrs)</p>
-        </li>
-        <li>
-          <p>migrate-message (mmsg)</p>
-        </li>
-        <li>
-          <p>most useful: <strong>migrate-status</strong>, <strong>migrate-import</strong>, <strong>migrate-reset-status</strong></p>
-        </li>
-        <li>
-          <p>use <strong><code>--help</code></strong> option to find out more</p>
-        </li>
-      </ul>
-    </section>
+    <section>
+      <!-- vertical (nested) slides -->
+      <section id="drush-commands">
+        <h2>drush commands</h2>
+        <ul>
+          <li>
+            <p>Provided by migrate_tools module</p>
+          </li>
+          <li>
+            <p>migrate-status (ms)</p>
+          </li>
+          <li>
+            <p>migrate-import (mim)</p>
+          </li>
+          <li>
+            <p>migrate-rollback (mr)</p>
+          </li>
+          <li>
+            <p>migrate-stop (mst)</p>
+          </li>
+          <li>
+            <p>migrate-reset-status (mrs)</p>
+          </li>
+          <li>
+            <p>migrate-message (mmsg)</p>
+          </li>
+          <li>
+            <p>most useful: <strong>migrate-status</strong>, <strong>migrate-import</strong>, <strong>migrate-reset-status</strong></p>
+          </li>
+          <li>
+            <p>use <strong><code>--help</code></strong> option to find out more</p>
+          </li>
+        </ul>
+      </section>
 
-    <section id="drush-ms">
-      <h2>drush migrate-status (ms)</h2>
-      <ul>
-        <li>
-          <p><code>drush ms --group=news2</code></p>
-        </li>
-        <li>
-          <p>Same information as displayed in UI</p>
-        </li>
-        <li>
-          <p>But, displayed in migration dependency order</p>
-        </li>
-      </ul>
-      <p><a href="./img/drush-ms-group.png" target="_blank"><img src="./img/drush-ms-group.png" alt="Running drush ms group" style="max-width:100%;"></a></p>
-    </section>
+      <section id="drush-ms">
+        <h2>drush migrate-status (ms)</h2>
+        <ul>
+          <li>
+            <p><code>drush ms --group=news2</code></p>
+          </li>
+          <li>
+            <p>Same information as displayed in UI</p>
+          </li>
+          <li>
+            <p>But, displayed in migration dependency order</p>
+          </li>
+        </ul>
+        <p><a href="./img/drush-ms-group.png" target="_blank"><img src="./img/drush-ms-group.png" alt="Running drush ms group" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="drush-mim-1">
-      <h2>drush migrate-import (mim)</h2>
-      <pre>
-# run all migrations in named group (in dependency order)
-drush mim --group=news2
+      <section id="drush-mim-1">
+        <h2>drush migrate-import (mim)</h2>
+        <pre>
+  # run all migrations in named group (in dependency order)
+  drush mim --group=news2
 
-# run named migration for a single item
-drush mim news2_tags_migration --limit=1
+  # run named migration for a single item
+  drush mim news2_tags_migration --limit=1
 
-# will run just the migraton IDs listed - unprocessed items only
-drush mim news2_tags_migration,news2_authors_migration
+  # will run just the migraton IDs listed - unprocessed items only
+  drush mim news2_tags_migration,news2_authors_migration
 
-# run the named migration with update flag
-drush mim news2_tags_migration --update
+  # run the named migration with update flag
+  drush mim news2_tags_migration --update
 
-# display all options available
-drush mim --help
-      </pre>
-    </section>
+  # display all options available
+  drush mim --help
+        </pre>
+      </section>
 
-    <section id="drush-mim-2">
-      <h2 class="no-text-transform">drush mim --help</h2>
-      <p><a href="./img/drush-mim-help.png" target="_blank"><img src="./img/drush-mim-help.png" alt="Help info for drush mim" style="max-width:100%;"></a></p>
-    </section>
+      <section id="drush-mim-2">
+        <h2 class="no-text-transform">drush mim --help</h2>
+        <p><a href="./img/drush-mim-help.png" target="_blank"><img src="./img/drush-mim-help.png" alt="Help info for drush mim" style="max-width:100%;"></a></p>
+      </section>
 
-    <section id="drush-mrs">
-      <h2>drush migrate-reset-status (mrs)</h2>
-      <ul>
-        <li>
-          <p>Useful if your migration has failed and is left in a non "Idle" status.</p>
-        </li>
-      </ul>
-      <pre>
-        # reset news2_articles_migration which had failed and is at state "Importing"
-        drush mrs news2_articles_migration
-      </pre>
+      <section id="drush-mrs">
+        <h2>drush migrate-reset-status (mrs)</h2>
+        <ul>
+          <li>
+            <p>Useful if your migration has failed and is left in a non "Idle" status.</p>
+          </li>
+        </ul>
+        <pre>
+          # reset news2_articles_migration which had failed and is at state "Importing"
+          drush mrs news2_articles_migration
+        </pre>
+      </section>
     </section>
 
     <section id="dealing-with-errors">
@@ -899,7 +935,7 @@ drush mim --help
       <h2>Example Module</h2>
       <ul>
         <li>
-          <p><strong>migrate_plus</strong> "Beer" example module</p>
+          <p><strong>migrate_plus</strong> "Beer" example</p>
         </li>
         <li>
           <p>Variety of entity creation methods - user, node, taxonomy_term</p>
