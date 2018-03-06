@@ -198,7 +198,21 @@
           <p>Export =&gt; CSV extracts (via views and custom code)</p>
         </li>
         <li>
-          <p>Import =&gt; using source CSV, <code>BaseCSV</code> class (migrate_source_csv contrib)</p>
+          <p>Source plugins extend <code>BaseCSV</code> class (migrate_source_csv contrib)</p>
+        </li>
+        <li>
+          <p>Import via composer script defined in <strong>composer.json</strong> file</p>
+          <pre>
+  "scripts": {
+    ...,
+    "import-news": [
+      "cd web && drush en tg_news_migration -y && drush cr && drush migrate:import news_tags_migration,news_files_migration,news_author_images_migration,news_authors_migration,news_articles_migration && drush pm-uninstall tg_news_migration -y"
+    ]
+  },
+          </pre>
+        </li>
+        <li>
+          <p>Build script executes <code>composer run-script import-news</code></p>
         </li>
       </ul>
     </section>
