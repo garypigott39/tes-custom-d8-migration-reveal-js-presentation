@@ -206,7 +206,9 @@
   "scripts": {
     ...,
     "import-news": [
-      "cd web && drush en tg_news_migration -y && drush cr && drush migrate:import news_tags_migration,news_files_migration,news_author_images_migration,news_authors_migration,news_articles_migration && drush pm-uninstall tg_news_migration -y"
+      "cd web && drush en tg_news_migration -y && drush cr && drush migrate:import news_tags_migration,
+       news_files_migration,news_author_images_migration,news_authors_migration,
+       news_articles_migration && drush pm-uninstall tg_news_migration -y"
     ]
   },
           </pre>
@@ -438,6 +440,30 @@ $databases['news_migrate']['default'] = array (
       <section id="news-articles-config-file">
         <h2>News Articles Config File</h2>
         <p><a href="./img/news-articles-yaml-snippet.png" target="_blank"><img src="./img/news-articles-yaml-snippet.png" alt="News article YML snippet" style="max-width:100%;"></a></p>
+      </section>
+
+      <section id="news-articles-dependencies">
+        <h2>News Articles Dependencies</h2>
+        <ul>
+          <li>
+            <p>Dependencies marked as <strong>optional</strong></p>
+          </li>
+          <li>
+            <p>We reject taxonomy term rows via <code>prepareRow()</code> in tags import</p>
+          </li>
+          <li>
+            <p>Alternative solution reject in process step <code>throw new MigrateSkipRowException($msg)</code></p>
+          </li>
+          <li>
+            <p>Using <strong>required</strong> dependency gives an error if not all rows processed</p>
+          </li>
+          <li>
+            <p><code>checkRequirements()</code> in core Migration.php - see <code>allRowsProcessed()</code> method</p>
+          </li>
+          <li>
+            <p>See <a href="https://www.drupal.org/project/drupal/issues/2797505">https://www.drupal.org/project/drupal/issues/2797505</a></p>
+          </li>
+        </ul>
       </section>
     </section>
 
